@@ -6,14 +6,8 @@ do
 
 SERVICE0='server.py'
 
-if ps ax | grep -v grep | grep $SERVICE0 > /dev/null
-then
-    echo "$SERVICE0 service running "
-else
-    echo there is no such "$SERVICE0 service, starting"
-    python /usr/local/bin/server.py
-fi
-
+ps -ef | grep $SERVICE0 | grep -v grep
+[ $?  -eq "0" ] && echo "$SERVICE0 process is running" || echo "$SERVICE0 process is not running, starting"; python /usr/local/bin/server.py
 
 
 
